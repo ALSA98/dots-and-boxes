@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --dot: #698baa;
+  --line: #d9d9ec;
+  --blue: #1e90ff;
+  --red: #f02843;
+  --bg: white;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* setup section */
+
+.setup {
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+
+.setup h2 {
+  margin-top: 0;
+}
+
+.setup form {
+  width: 248px;
+}
+
+.setup input {
+  height: 32px;
+  padding: 8px;
+  width: 105px;
+}
+
+.start-btn {
+  width: 248px;
+  height: 48px;
+  margin-top: 32px;
+  border: 0;
+  font-weight: bold;
+  background-color: var(--blue);
+  color: var(--bg);
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.start-btn:hover {
+  opacity: 0.8;
+}
+
+.start-btn:active {
+  opacity: 0.9;
+  transform: scale(0.97);
+}
+
+/* game */
+
+.row {
+  display: flex;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  position: relative;
+}
+
+.dot:after {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  content: '';
+  background-color: var(--dot);
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  top: -4px;
+  left: -4px;
+}
+
+.line {
+  background-color: var(--line);
+}
+
+.horizontal-line {
+  width: 64px;
+  height: 4px;
+}
+
+.vertical-line {
+  width: 4px;
+  height: 64px;
+}
+
+.box {
+  width: 64px;
+  height: 64px;
+}
