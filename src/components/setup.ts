@@ -24,7 +24,7 @@ export class Setup extends Component<HTMLDivElement, HTMLDivElement> {
   renderContent() {}
 
   set rowsCount(value: number) {
-    if (value <= 0 || value >= 100) {
+    if (value <= 0 || value > 100) {
       throw new Error('Please pass a value between 1 and 100.')
     }
     this._rows = value
@@ -34,7 +34,7 @@ export class Setup extends Component<HTMLDivElement, HTMLDivElement> {
   }
 
   set columnsCount(value: number) {
-    if (value <= 0 || value >= 100) {
+    if (value <= 0 || value > 100) {
       throw new Error('Please pass a value between 1 and 100.')
     }
     this._columns = value

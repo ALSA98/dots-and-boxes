@@ -3,19 +3,22 @@ import { Dot } from './dot'
 import { Line } from './line'
 import { Box } from './box'
 import { Direction } from '../../models/line'
+import state from '../../store/state'
 
 export class Row extends Component<HTMLDivElement, HTMLDivElement> {
   public linesDirection: Direction
   private boxCount: number
   private elementId: string
   private rowNumber: number
+  private handleLineClick: Function
 
   constructor(config: {
     linesDirection: Direction
     rowNumber: number
     boxCount: number
+    handleLineClick: Function
   }) {
-    const { linesDirection, rowNumber, boxCount } = config
+    const { linesDirection, rowNumber, boxCount , handleLineClick} = config
     const elementId =
       linesDirection === Direction.Vertical ? 'v' + rowNumber : 'h' + rowNumber
     super({
@@ -28,6 +31,7 @@ export class Row extends Component<HTMLDivElement, HTMLDivElement> {
     this.rowNumber = rowNumber
     this.boxCount = boxCount
     this.linesDirection = linesDirection
+    this.handleLineClick = handleLineClick
 
     this.renderContent()
   }
@@ -51,7 +55,8 @@ export class Row extends Component<HTMLDivElement, HTMLDivElement> {
         rowId: this.elementId,
         direction: this.linesDirection,
         row: this.rowNumber,
-        column: col
+        column: col,
+        handleLineClick: this.handleLineClick
       })
     }
     new Dot({ rowId: this.elementId })
@@ -64,15 +69,18 @@ export class Row extends Component<HTMLDivElement, HTMLDivElement> {
         rowId: this.elementId,
         direction: this.linesDirection,
         row: this.rowNumber,
-        column: col
+        column: col,
+        handleLineClick: this.handleLineClick
       })
-      new Box({ rowId: this.elementId, row: this.rowNumber, column: col })
+      const boxId = `${this.rowNumber}-${col}`
+      state.boxes[boxId] = new Box({ rowId: this.elementId, row: this.rowNumber, column: col })
     }
     new Line({
       rowId: this.elementId,
       direction: this.linesDirection,
       row: this.rowNumber,
-      column: col
+      column: col,
+      handleLineClick: this.handleLineClick
     })
   }
 }

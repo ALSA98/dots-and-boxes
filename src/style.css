@@ -88,10 +88,39 @@ body {
   border-radius: 50%;
   top: -4px;
   left: -4px;
+  z-index: 5;
 }
 
 .line {
   background-color: var(--line);
+  transition: 0.2s;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.line[adjusted] {
+  cursor: context-menu;
+}
+
+.red {
+  background-color: var(--red);
+}
+
+.blue {
+  background-color: var(--blue);
+}
+
+.line:not([adjusted]):hover {
+  opacity: 0.45;
+}
+
+.line:not([adjusted]):hover::after {
+  opacity: 0.1;
+}
+.line:not([adjusted]):active {
+  /* opacity: 0.2; */
+  transform: scale(0.8);
 }
 
 .horizontal-line {
@@ -99,12 +128,68 @@ body {
   height: 4px;
 }
 
+.horizontal-line::after {
+  background-color: var(--dot);
+  opacity: 0;
+  content: '';
+  display: block;
+  z-index: -3;
+  width: 64px;
+  transform: translateY(-10px);
+  position: absolute;
+  height: 24px;
+  transition: 0.2s;
+}
+
 .vertical-line {
   width: 4px;
   height: 64px;
 }
 
+.vertical-line::after {
+  background-color: var(--dot);
+  opacity: 0;
+  content: '';
+  display: block;
+  z-index: -3;
+  width: 24px;
+  transform: translateX(-10px);
+  position: absolute;
+  height: 64px;
+  transition: 0.2s;
+}
+
 .box {
   width: 64px;
   height: 64px;
+  opacity: 0.2;
+  transition: all 0.2s ease-in;
+  position: relative;
+}
+
+.box::after {
+  content: '';
+  width: 64px;
+  height: 64px;
+  opacity: 0.2;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transform: scale(0.5);
+  background-color: inherit;
+}
+
+.box.blue::after , .box.red::after {
+  animation: boxOwend 0.5s ease-out;
+}
+
+@keyframes boxOwend {
+  0%{
+    transform: scale(1);
+    opacity: .8;
+  }
+  100%{
+    transform: scale(3);
+    opacity: 0;
+  }
 }

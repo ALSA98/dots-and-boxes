@@ -4,5 +4,6 @@ export interface IBox {
   row: number
   column: number
   color: Color
-  linesIds: string[]
+  filledLinesCount: number,
+  completed: boolean
 }
